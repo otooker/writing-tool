@@ -38,6 +38,18 @@ showWordCount();
 
 
 
+// fetching API image, 123 foxes available 
+
+const rewardContainer = document.querySelector("#reward-container");
+const baseURL ='https://randomfox.ca/?i='
+
+function getRandomFox(fox) {
+    console.log 
+}
+
+
+
+
 //TODO: function for displaying API at intervals of 100 
 
 
