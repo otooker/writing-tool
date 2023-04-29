@@ -37,47 +37,45 @@ showWordCount();
 
 // fetching API image, 123 foxes available 
 const rewardContainer = document.querySelector("#reward-container");
-const baseURL ='https://randomfox.ca/images/';
+//const baseURL ='https://randomfox.ca/images/';
 
 
 // this is a really simple API that literally just gets a photo at a number 1-123. If you're feeling fun and frisky after making this all work, go ahead and try to do the other idea (spooky jokes or riddles) for fun
-const getRandomFoxNumber = () => {
-    const randomNumber = Math.floor(Math.random() * 123) +1;
-    return randomNumber;
-}
+
 
 //get the fox data -- which is really just the image but we gotta fetch somewhere
-async function getFox(number) {
-    let gottenFox = await fetch(`${baseURL}${number}.jpg`)
-    return gottenFox;
+async function getFoxRemotely() {
+    const response = await fetch("https://randomfox.ca/floof/");
+    const foxData = await response.json();
+    return foxData;
+
     //.then(result => result.json()); //not sure if i need this since I'm just pulling one image
 }
 
-//console.log(getFox(2)) //should bring you to an image of a smiling fox in the woods by some water
+
+//this, right now, renders the fox image and HTML onto the website. Next step, is making sure this only gets activated as a reward for writing 100 words. Try to write the code so it can be adjusted to other word lengths. 
+const gottenFoxData = getFoxRemotely();
+
+gottenFoxData.then((data) => {
+    //console.log(data.image);  
+   rewardContainer.innerHTML = `<h2>A wild fox appears! Good job writing 100 words ^_^</h2>
+   <h3><img src="${data.image}"></h3>`
+})
 
 
-// render the fox image on the page, need await async for the promise?
-// HEY YOU figure out where the rewardContainer comes into play 
+async function getRewardedWithFoxOnWebPage(){
+    const userTextInput = document.querySelector('#text-area-box').value;
+   // const currentWordCount = ;
+    document.getElementById('show-count').addEventListener('onchange', async ()=> { 
+        if(userTextInput === 1){
+        rewardContainer.innerHTML = await renderFoxOnWebpage();
+        } 
+    })
 
-async function renderFoxOnWebpage(){
-    let imageSource = await getFox(getRandomFoxNumber());
-    return `
-    <h2>A wild fox appears! Good job writing 100 words ^_^</h2>
-    <h3><img src="${imageSource}"></h3>
-    `
     }
-//console.log(renderFoxOnWebpage());
 
 
-async function getRewardedWithFox(){
-    
-    //renderFoxOnWebpage()
-    rewardContainer.innerHTML = await renderFoxOnWebpage();
-}
-getRewardedWithFox();
-//showCount.innerHTML = countWords(userTextInput);
-// TODO: function for storing highestWordCount 
-
+// TODO: function for storing highestWordCount -- divided by highest amount of foxes earned times the goal word count?          WHAT IS THE LOGIC 
 
 
 //TODO: function for displaying API at intervals of 100, onchange event listener might help
@@ -86,6 +84,10 @@ getRewardedWithFox();
 
 
 /* SPACE FOR DRAFT CODE 
+
+//showCount.innerHTML = countWords(userTextInput);
+
+
 
 //this should help us not lose text in between
 function restoreText() {
@@ -105,9 +107,26 @@ function countedWordsFromInput() {
 }
 
 
-
 function main(){
     renderFoxOnWebpage();
 }
 
+
+
+REDUNDANT CODE -- the API randomizes itself 
+const getRandomFoxNumber = () => {
+    const randomNumber = Math.floor(Math.random() * 123) +1;
+    return randomNumber;
+}
+
+
+The first draft of getting the fox on the page
+function renderFoxOnWebpage(){
+    //let imageSource = await getFox(getRandomFoxNumber());
+    return `
+    <h2>A wild fox appears! Good job writing 100 words ^_^</h2>
+    <h3><img src="${data.image}"></h3>
+    `
+    }
+//console.log(renderFoxOnWebpage());
 */
