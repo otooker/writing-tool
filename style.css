@@ -3,6 +3,11 @@ reward-container {
 }
 
 img {
-    width: 100%;
+    max-width: 300px;
     height: auto;
+}
+
+textarea {
+    height: 500px;
+    width: 500px;
 }

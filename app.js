@@ -1,9 +1,8 @@
-// bare min needs: text box, word counter, fox image api FUNCTIONAL PROGRAMMING keep it cleeean please
-
-// so in the orinal written kitten, they are calling their functions in the HTML so that way it doesn't get crazy messy in the js page. that being said, that's not good practice and it hurts my head rn 
+// Stretch goals: user inputs word goal, local storage, nicer &/or repsonsive CSS
+// Super-stretch goals: add Raven Comedian reward, add trickster with riddles 
 
 let currentWordCount = 0;
-const wordsToEarnReward = 100;
+//const wordsToEarnReward = 100;
 let foxesEarned = 0;
 let foxesShown = 0;
 
@@ -24,15 +23,23 @@ function countWords(string) {
 //console.log(countWords('This is a bunch of words equalling eight.')) //expecting 8
 //console.log(countWords('Test two.')) //expecting 2
 
-//console.log(currentWordCount);
-//displays active word count on html page 
+let wordsToEarnReward = 
 
+//this allows the current word count to be accessible to the rest of the code and keeps it active
 document.querySelector('#text-area-box').addEventListener("input", () => {
     const userTextInput = document.querySelector('#text-area-box').value;
     currentWordCount = countWords(userTextInput);
     showWordCount(currentWordCount);
     checkRewardEligibility();
 });
+
+//TODO USER INPUT WORD GOAL SECTION
+//Event listener/submit input to make the user create the wordgoal
+
+
+
+//let wordsToEarnReward = document.getElementById('set-word-goal').value;
+//console.log(wordsToEarnReward);
 
 function showWordCount(currentWordCount){
     document.getElementById('show-count').innerText = currentWordCount; 
@@ -41,9 +48,6 @@ function showWordCount(currentWordCount){
 
 
 const rewardContainer = document.querySelector("#reward-container");
-
-// this is a really simple API that literally just gets a photo at a number 1-123. If you're feeling fun and frisky after making this all work, go ahead and try to do the other idea (spooky jokes or riddles) for fun
-
 
 //get the fox data from API -- which is really just the image but we gotta fetch somewhere
 async function getFoxRemotely() {
