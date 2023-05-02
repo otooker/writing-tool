@@ -78,10 +78,6 @@ function setRewardParameter(num) {
 //// if STUFF MET, then activate the reward function above OKAY YEAH 
 //const wordGoal = 100;
 
-
-
-
-
 function checkRewardEligibility(){
     const milestonesPassed = Math.floor(currentWordCount/wordsToEarnReward);
     if(milestonesPassed > foxesShown) {
