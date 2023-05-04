@@ -1,14 +1,54 @@
-// Stretch goals: user inputs word goal, local storage, nicer &/or repsonsive CSS
-// Super-stretch goals: add Raven Comedian reward, add trickster with riddles 
+// Stretch goals: local storage, copy/paste text button, nicer &/or repsonsive CSS
+// Super-stretch goals: add Raven Comedian reward, add trickster (coyote? sphinx?) with riddles 
 
 let currentWordCount = 0;
-//const wordsToEarnReward = 100;
+let wordsToEarnReward = 100;
 let foxesEarned = 0;
 let foxesShown = 0;
 
-
 console.log('Once upon a midnight dreary'); 
 const showCount = document.querySelector('#show-count');
+
+
+//TODO USER INPUT WORD GOAL SECTION
+//Event listener to make the user create the wordgoal
+//you may have to change the logic behind get reward, so that way you can change 
+
+document.getElementById('set-word-goal').addEventListener("change", () => {
+    let userInputWordGoal = document.getElementById('set-word-goal').value;
+    console.log(userInputWordGoal);
+    wordsToEarnReward = userInputWordGoal;
+})
+
+//setRewardParameter(userInputWordGoal);
+
+//let wordsToEarnReward = document.getElementById('set-word-goal').value;
+//console.log(wordsToEarnReward);
+
+
+/*
+let submittingWordsToEarnReward = document.getElementById("set-word-goal").value;
+console.log(wordsToEarnReward);
+
+wordsToEarnReward.addEventListener("submit", (num) => {
+    if (num > 0){
+        num = wordsToEarnReward;
+        console.log(wordsToEarnReward)
+    }
+})
+
+userInputWordGoal.addEventListener("onchange", (num) =>
+{
+    setRewardParameter(num);
+})
+
+*/
+
+/*
+ */
+
+//// if STUFF MET, then activate the reward function above OKAY YEAH 
+//const wordGoal = 100;
 
 //the actual wordcounter, it ensures to count on the next line! woohoo! 
 function countWords(string) {
@@ -23,9 +63,10 @@ function countWords(string) {
 //console.log(countWords('This is a bunch of words equalling eight.')) //expecting 8
 //console.log(countWords('Test two.')) //expecting 2
 
-let wordsToEarnReward = 
 
-//this allows the current word count to be accessible to the rest of the code and keeps it active
+
+//this acts as our main function: it allows the current word count to be accessible to the rest of the code, which is important because the whole point of this tool hinges on this
+
 document.querySelector('#text-area-box').addEventListener("input", () => {
     const userTextInput = document.querySelector('#text-area-box').value;
     currentWordCount = countWords(userTextInput);
@@ -33,14 +74,7 @@ document.querySelector('#text-area-box').addEventListener("input", () => {
     checkRewardEligibility();
 });
 
-//TODO USER INPUT WORD GOAL SECTION
-//Event listener/submit input to make the user create the wordgoal
-
-
-
-//let wordsToEarnReward = document.getElementById('set-word-goal').value;
-//console.log(wordsToEarnReward);
-
+//Displays wordcount on web page
 function showWordCount(currentWordCount){
     document.getElementById('show-count').innerText = currentWordCount; 
 }
@@ -49,39 +83,28 @@ function showWordCount(currentWordCount){
 
 const rewardContainer = document.querySelector("#reward-container");
 
-//get the fox data from API -- which is really just the image but we gotta fetch somewhere
+//fetching from Random Fox API
 async function getFoxRemotely() {
     const response = await fetch("https://randomfox.ca/floof/");
     const foxData = await response.json();
     return foxData;
-    //.then(result => result.json()); //not sure if i need this since I'm just pulling one image
 }
 
-//this, right now, renders the fox image and HTML onto the website. Next step, is making sure this only gets activated as a reward for writing 100 words. Try to write the code so it can be adjusted to other word lengths. 
-
+//this function display the fox image and HTML onto the website.
 async function rewardUserWithFox(){
-   // if (checkRewardEligibility === true) 
-   
     const gottenFoxData = getFoxRemotely();
-    gottenFoxData.then((data) => {
-//console.log(data.image);  
+    gottenFoxData.then((data) => {  
         rewardContainer.innerHTML = `
-           <h2>A wild fox appears! Good job writing 100 words ^_^</h2>
+           <h2>A wild fox appears!</h2>
            <h3><img id="fox-image" src="${data.image}"></h3>
-           `
+           <h3>Good job meeting your word goal.</h3>
+           <h3>Do it again for another fox ^_^</h3>
+          `
     })
 }
 
-/*
-function setRewardParameter(num) {
-    wordsForReward = num;
-    
-    foxesShown = parseInt(foxesEarned);
-} */
 
-//// if STUFF MET, then activate the reward function above OKAY YEAH 
-//const wordGoal = 100;
-
+//do you deserve the fox?????? this function will tell 
 function checkRewardEligibility(){
     const milestonesPassed = Math.floor(currentWordCount/wordsToEarnReward);
     if(milestonesPassed > foxesShown) {
@@ -94,27 +117,7 @@ function checkRewardEligibility(){
 }
 
 
-//checkRewardEligibility(100, 101);
-
-//foxesShown++;
-
-
-//checkRewardEligibility()
-
-//console.log(checkRewardEligibility(3, 0));
-
-// TODO: function for storing highestWordCount -- divided by highest amount of foxes earned times the goal word count?          WHAT IS THE LOGIC 
-
-
-//TODO: function for displaying API at intervals of 100, onchange event listener might help
-
-
-
-
 /* SPACE FOR DRAFT CODE 
-
-//showCount.innerHTML = countWords(userTextInput);
-
 
 
 //this should help us not lose text in between
@@ -125,46 +128,9 @@ function restoreText() {
 }
 
 
-const currentWords = countWords(document.querySelector('#text-area-box').value)
-console.log(currentWords);
-foxesEarned = currentWords/wordGoal;
-
-
-function countedWordsFromInput() {
-    document.querySelector('#text-area-box').addEventListener("input", () => {
-        const userTextInput = document.querySelector('#text-area-box').value;
-        const currentWordCount = countWords(userTextInput);
-        return currentWordCount;
+function setRewardParameter(userInputWordGoal) {
+    let wordsToEarnReward = userInputWordGoal;
+    console.log(wordsToEarnReward);
 }
-
-
-function main(){
-    renderFoxOnWebpage();
-}
-
-
-
-REDUNDANT CODE -- the API randomizes itself 
-const getRandomFoxNumber = () => {
-    const randomNumber = Math.floor(Math.random() * 123) +1;
-    return randomNumber;
-}
-
-
-The first draft of getting the fox on the page
-function renderFoxOnWebpage(){
-    //let imageSource = await getFox(getRandomFoxNumber());
-    return `
-    <h2>A wild fox appears! Good job writing 100 words ^_^</h2>
-    <h3><img src="${data.image}"></h3>
-    `
-    }
-//console.log(renderFoxOnWebpage());
-
-
-
-
-
-
 
 */

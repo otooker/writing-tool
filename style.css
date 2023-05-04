@@ -11,3 +11,15 @@ textarea {
     height: 500px;
     width: 500px;
 }
+
+h1 {
+
+}
+
+.goal-container {
+    margin: 15px;
+}
+
+#user-container {
+    margin: 15px;
+}
