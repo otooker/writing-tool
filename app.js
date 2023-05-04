@@ -30,8 +30,6 @@ function countWords(string) {
 //console.log(countWords('This is a bunch of words equalling eight.')) //expecting 8
 //console.log(countWords('Test two.')) //expecting 2
 
-
-
 //this event listener acts as our main function: it allows the current word count to be accessible to the rest of the code, which is important because the whole point of this tool hinges on this
 document.querySelector('#text-area-box').addEventListener("input", () => {
     const userTextInput = document.querySelector('#text-area-box').value;
@@ -41,6 +39,12 @@ document.querySelector('#text-area-box').addEventListener("input", () => {
 });
 
 
+//local storage!!!!
+function storeTextLocally(){
+    let userText = document.querySelector('#text-area-box').value;
+    localStorage.setItem("text", userText);
+}
+storeTextLocally();
 
 //Displays wordcount on web page
 function showWordCount(currentWordCount){
