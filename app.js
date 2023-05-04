@@ -82,13 +82,42 @@ function checkRewardEligibility(){
     if (foxesEarned > foxesShown){
         rewardUserWithFox();
         foxesShown++;
+    }
 }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* SPACE FOR DRAFT CODE 
+Dear teachers, because I still want to keep working on this, please do not consider the code below to be a part of Phase One judgement (unless it benefits me)
 
+// logic the highest wordcount given a fox MINUS current word goal is greater than or equal to the current wordsToEarnReward
 
+    let highestRewardedWordCount = ''; //does this line have to be outside this function like above
+    console.log(highestRewardedWordCount);
+    let differenceBetweenRewardAndCurrentWriting = currentWordCount - highestRewardedWordCount;
+    if (differenceBetweenRewardAndCurrentWriting == wordsToEarnReward) {
+        rewardUserWithFox();
+        console.log(highestRewardedWordCount);
+        highestRewardedWordCount += differenceBetweenRewardAndCurrentWriting;
+        console.log(highestRewardedWordCount);
+    }
 
 function setRewardParameter(userInputWordGoal) {
     let wordsToEarnReward = userInputWordGoal;
