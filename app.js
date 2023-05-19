@@ -1,4 +1,4 @@
-// Stretch goals: local storage, copy/paste text button, nicer &/or repsonsive CSS
+// Stretch goals: copy/paste text button, nicer &/or repsonsive CSS
 // Super-stretch goals: add Raven Comedian reward, add trickster (coyote? sphinx?) with riddles 
 
 let currentWordCount = 0;
@@ -45,6 +45,8 @@ function storeTextLocally(){
     localStorage.setItem("text", userText);
 }
 storeTextLocally();
+
+//solve this later 
 
 //Displays wordcount on web page
 function showWordCount(currentWordCount){
@@ -119,31 +121,4 @@ Dear teachers, because I still want to keep working on this, please do not consi
         console.log(highestRewardedWordCount);
     }
 
-function setRewardParameter(userInputWordGoal) {
-    let wordsToEarnReward = userInputWordGoal;
-    console.log(wordsToEarnReward);
-}
-//setRewardParameter(userInputWordGoal);
-
-//let wordsToEarnReward = document.getElementById('set-word-goal').value;
-//console.log(wordsToEarnReward);
-
-
-/*
-let submittingWordsToEarnReward = document.getElementById("set-word-goal").value;
-console.log(wordsToEarnReward);
-
-wordsToEarnReward.addEventListener("submit", (num) => {
-    if (num > 0){
-        num = wordsToEarnReward;
-        console.log(wordsToEarnReward)
-    }
-})
-
-userInputWordGoal.addEventListener("onchange", (num) =>
-{
-    setRewardParameter(num);
-})
-
-*/
-
+    */
